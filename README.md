@@ -186,15 +186,5 @@ src/
 └── server.ts       # Server Entry Point
 ```
 
-## Deployment
 
-You can deploy this API to platforms like **Render**, **Railway**, or **Heroku**.
-
-### Steps for [Render](https://render.com/):
-1.  Push your code to GitHub.
-2.  Create a **New Web Service** on Render.
-3.  Connect your repository.
-4.  Set **Build Command**: `npm install && npm run build`
-5.  Set **Start Command**: `npm start`
-6.  Add Environment Variables (`MONGO_URI`, `JWT_SECRET`) in the settings.
 
