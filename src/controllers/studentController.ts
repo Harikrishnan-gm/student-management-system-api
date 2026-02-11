@@ -2,9 +2,7 @@ import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth';
 import Task from '../models/Task';
 
-// @desc    Get logged in student's tasks
-// @route   GET /api/student/tasks
-// @access  Private (Student only)
+// Get tasks for the logged-in student
 export const getMyTasks = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) {
@@ -14,11 +12,8 @@ export const getMyTasks = async (req: AuthRequest, res: Response) => {
 
         const tasks = await Task.find({ assignedTo: req.user._id });
 
-        // Check for overdue tasks and update them locally for response if needed, 
-        // or we can rely on a background job. For simplicity, we just return them.
-        // Ideally, we check date and update status if it's past due.
-
-        // Simple Overdue check on fetch
+        // Check if any pending tasks are past the due date
+        // If so, mark them as 'overdue' in the DB
         const now = new Date();
         const tasksWithStatus = await Promise.all(tasks.map(async (task) => {
             if (task.status === 'pending' && new Date(task.dueDate) < now) {
@@ -30,6 +25,7 @@ export const getMyTasks = async (req: AuthRequest, res: Response) => {
 
         res.json(tasksWithStatus);
     } catch (error: any) {
+        console.error('Error fetching tasks:', error);
         res.status(500).json({ message: error.message });
     }
 };

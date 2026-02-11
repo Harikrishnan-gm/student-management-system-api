@@ -52,14 +52,12 @@ export const getAllStudents = async (req: Request, res: Response) => {
     }
 };
 
-// @desc    Assign a task to a student
-// @route   POST /api/admin/assign-task
-// @access  Private (Admin only)
+// Assign a new task to a student
 export const assignTask = async (req: Request, res: Response) => {
     try {
         const { title, description, dueDate, assignedTo } = req.body;
 
-        // Verify student exists
+        // Verify the student actually exists before assigning
         const student = await User.findById(assignedTo);
         if (!student || student.role !== 'student') {
             res.status(404).json({ message: 'Student not found' });

@@ -30,16 +30,16 @@ const TaskSchema: Schema = new Schema(
         status: {
             type: String,
             enum: ['pending', 'overdue', 'completed'],
-            default: 'pending',
+            default: 'pending', // Starts as pending
         },
         assignedTo: {
             type: Schema.Types.ObjectId,
-            ref: 'User', // Reference to the User model
+            ref: 'User', // Link to the student
             required: true,
         },
     },
     {
-        timestamps: true, // Automatically add createdAt and updatedAt fields
+        timestamps: true, // Auto-manage createdAt/updatedAt
     }
 );
 

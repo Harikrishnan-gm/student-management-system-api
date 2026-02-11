@@ -1,18 +1,18 @@
 import { Response, NextFunction } from 'express';
 import { AuthRequest } from './auth';
 
-// Middleware to check for specific roles
+// Role Guard: Block access if user doesn't have the required role
 export const authorizeRole = (...roles: string[]) => {
     return (req: AuthRequest, res: Response, next: NextFunction) => {
-        // Check if the user is attached to the request (ensures protect middleware was run)
+        // Sanity check: ensure user is authenticated first
         if (!req.user) {
-            return res.status(401).json({ message: 'Not authorized, user not found' });
+            return res.status(401).json({ message: 'User context missing' });
         }
 
-        // Check if the user's role is included in the allowed roles
+        // Check against allowed roles
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({
-                message: `User role '${req.user.role}' is not authorized to access this route`
+                message: `Access Denied: Requires '${roles.join(' or ')}' role`
             });
         }
 

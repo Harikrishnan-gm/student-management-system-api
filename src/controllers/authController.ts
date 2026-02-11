@@ -45,9 +45,7 @@ export const adminLogin = async (req: Request, res: Response) => {
     }
 };
 
-// @desc    Auth Student & get token
-// @route   POST /api/auth/student/login
-// @access  Public
+// Student Login
 export const studentLogin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
@@ -55,10 +53,12 @@ export const studentLogin = async (req: Request, res: Response) => {
         const user = await User.findOne({ email });
 
         if (user && (await user.comparePassword(password))) {
+            // Strict check: make sure this isn't an admin trying to login here
             if (user.role !== 'student') {
                 res.status(401).json({ message: 'Not authorized as student' });
                 return;
             }
+
             res.json({
                 _id: user._id,
                 name: user.name,
@@ -68,7 +68,7 @@ export const studentLogin = async (req: Request, res: Response) => {
                 token: generateToken(user._id.toString()),
             });
         } else {
-            res.status(401).json({ message: 'Invalid email or password' });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error: any) {
         res.status(500).json({ message: error.message });

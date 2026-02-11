@@ -46,12 +46,16 @@ const UserSchema = new Schema(
     }
 );
 
-// Pre-save middleware to hash the password before saving
+// Pre-save middleware to automatically hash the password before saving to DB
 UserSchema.pre('save', async function () {
     const user = this as unknown as IUser;
+
+    // Only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) {
         return;
     }
+
+    // Generate a salt and hash the password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password!, salt);
 });

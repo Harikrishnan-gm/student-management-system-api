@@ -18,7 +18,8 @@
     "express": "^5.2.1",
     "gitignore": "^0.7.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.1.6"
+    "mongodb": "^6.21.0",
+    "mongoose": "^8.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",

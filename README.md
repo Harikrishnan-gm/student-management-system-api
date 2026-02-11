@@ -55,7 +55,8 @@ The server will start at: `http://localhost:5000`
 
 ## 📡 API Documentation
 
-### Base URL: `http://localhost:5000/api`
+### Base URL (Local): `http://localhost:5000/api`
+### Base URL (Deployed): `https://your-app-name.onrender.com/api`
 
 ### 1. Authentication
 
@@ -148,9 +149,16 @@ The server will start at: `http://localhost:5000`
       "title": "Complete Assignment 1",
       "status": "pending",
       "dueDate": "2026-12-31T00:00:00.000Z"
+    },
+    {
+      "_id": "651d...",
+      "title": "Old Assignment",
+      "status": "overdue", 
+      "dueDate": "2023-01-01T00:00:00.000Z"
     }
   ]
   ```
+  *Note: The system automatically updates tasks to `overdue` if the due date has passed.*
 
 #### Update Task Status
 - **Endpoint**: `PUT /student/tasks/:id/complete`
@@ -177,3 +185,16 @@ src/
 ├── app.ts          # Express App Setup
 └── server.ts       # Server Entry Point
 ```
+
+## 🌍 Deployment
+
+You can deploy this API to platforms like **Render**, **Railway**, or **Heroku**.
+
+### Steps for [Render](https://render.com/):
+1.  Push your code to GitHub.
+2.  Create a **New Web Service** on Render.
+3.  Connect your repository.
+4.  Set **Build Command**: `npm install && npm run build`
+5.  Set **Start Command**: `npm start`
+6.  Add Environment Variables (`MONGO_URI`, `JWT_SECRET`) in the settings.
+

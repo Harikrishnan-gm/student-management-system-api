@@ -7,26 +7,24 @@ export interface AuthRequest extends Request {
     user?: IUser;
 }
 
-// Middleware to protect routes
+// Protect routes - ensure user is logged in
 export const protect = async (req: AuthRequest, res: Response, next: NextFunction) => {
     let token;
 
-    // Check if the authorization header is present and starts with 'Bearer'
+    // 1. Look for token in Authorization header (Bearer schema)
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
-            // Get the token from the header
             token = req.headers.authorization.split(' ')[1];
 
-            // Verify the token
+            // 2. Verify token validity
             const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
 
-            // Get the user from the database and attach it to the request object
-            // Exclude the password from the user object
+            // 3. Attach user to request (exclude sensitive password)
             req.user = (await User.findById(decoded.id).select('-password')) as IUser;
 
-            next();
+            next(); // Move to the next middleware/controller
         } catch (error) {
-            console.error(error);
+            console.error('Auth Failed:', error);
             res.status(401).json({ message: 'Not authorized, token failed' });
         }
     }

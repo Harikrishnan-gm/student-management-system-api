@@ -11,8 +11,8 @@ import {
 const router = express.Router();
 
 // All routes are protected and restricted to Admin
-router.use(protect);
-router.use(authorizeRole('admin'));
+router.use(protect); // 1. Must be logged in
+router.use(authorizeRole('admin')); // 2. Must be an admin
 
 router.post('/add-student', addStudent);
 router.get('/students', getAllStudents);
