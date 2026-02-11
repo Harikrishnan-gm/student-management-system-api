@@ -56,7 +56,7 @@ The server will start at: `http://localhost:5000`
 ## API Documentation
 
 ### Base URL (Local): `http://localhost:5000/api`
-
+### Deployed URL :`https://student-management-system-api-8n0u.onrender.com/api`
 
 ### 1. Authentication
 
