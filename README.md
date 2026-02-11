@@ -4,7 +4,7 @@ A RESTful API for managing student records and tasks, built with **Node.js**, **
 
 This project implements a system where an **Admin** can manage students and assign tasks, and **Students** can log in to view and complete their assigned tasks.
 
-## 🚀 Technologies
+## Technologies
 
 - **Node.js** & **Express** (Backend Framework)
 - **TypeScript** (Type Safety)
@@ -14,7 +14,7 @@ This project implements a system where an **Admin** can manage students and assi
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 ### 1. Prerequisites
 - Node.js (v14+)
@@ -53,7 +53,7 @@ The server will start at: `http://localhost:5000`
 
 ---
 
-## 📡 API Documentation
+## API Documentation
 
 ### Base URL (Local): `http://localhost:5000/api`
 ### Base URL (Deployed): `https://your-app-name.onrender.com/api`
@@ -173,7 +173,7 @@ The server will start at: `http://localhost:5000`
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 src/
@@ -186,7 +186,7 @@ src/
 └── server.ts       # Server Entry Point
 ```
 
-## 🌍 Deployment
+## Deployment
 
 You can deploy this API to platforms like **Render**, **Railway**, or **Heroku**.
 
