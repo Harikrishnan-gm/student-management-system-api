@@ -56,7 +56,7 @@ The server will start at: `http://localhost:5000`
 ## API Documentation
 
 ### Base URL (Local): `http://localhost:5000/api`
-### Base URL (Deployed): `https://your-app-name.onrender.com/api`
+
 
 ### 1. Authentication
 
